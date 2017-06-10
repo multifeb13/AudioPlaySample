@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace AudioPlaySample
@@ -11,9 +11,40 @@ namespace AudioPlaySample
     {
         public App()
         {
-            InitializeComponent();
+            //InitializeComponent();
+            //
+            //MainPage = new AudioPlaySample.MainPage();
+            Button btnPlay = new Button
+            {
+                Text = "Play/Pause",
+                Command = new Command((obj) => {
+                    DependencyService.Get<IMediaPlayer>().PlayAsync("se01");
+                })
+            };
 
-            MainPage = new AudioPlaySample.MainPage();
+            Button btnStop = new Button
+            {
+                Text = "Stop",
+                Command = new Command((obj) => {
+                    DependencyService.Get<IMediaPlayer>().Stop();
+                })
+            };
+
+            // The root page of your application
+            var content = new ContentPage
+            {
+                Title = "AudioPlaySample",
+                Content = new StackLayout
+                {
+                    VerticalOptions = LayoutOptions.Center,
+                    Children = {
+                btnPlay,
+                btnStop
+            }
+                },
+                Padding = new Thickness(10)
+            };
+            MainPage = new NavigationPage(content);
         }
 
         protected override void OnStart()
@@ -29,6 +60,12 @@ namespace AudioPlaySample
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        public interface IMediaPlayer
+        {
+            Task PlayAsync(string title);
+            void Stop();
         }
     }
 }
