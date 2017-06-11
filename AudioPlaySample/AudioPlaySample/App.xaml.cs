@@ -14,11 +14,19 @@ namespace AudioPlaySample
             //InitializeComponent();
             //
             //MainPage = new AudioPlaySample.MainPage();
-            Button btnPlay = new Button
+            Button btnPlay1 = new Button
             {
-                Text = "Play/Pause",
+                Text = "Play/Pause 1",
                 Command = new Command((obj) => {
                     DependencyService.Get<IMediaPlayer>().PlayAsync("se01");
+                })
+            };
+
+            Button btnPlay2 = new Button
+            {
+                Text = "Play/Pause 2",
+                Command = new Command((obj) => {
+                    DependencyService.Get<IMediaPlayer>().PlayAsync("se02");
                 })
             };
 
@@ -38,9 +46,10 @@ namespace AudioPlaySample
                 {
                     VerticalOptions = LayoutOptions.Center,
                     Children = {
-                btnPlay,
-                btnStop
-            }
+                        btnPlay1,
+                        btnPlay2,
+                        btnStop
+                    }
                 },
                 Padding = new Thickness(10)
             };

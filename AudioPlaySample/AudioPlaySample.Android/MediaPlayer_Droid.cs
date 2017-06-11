@@ -35,7 +35,7 @@ namespace AudioPlaySample.Droid
                                 global::Android.App.Application.Context,
                                 resourceId
                             );
-                    player.Looping = true;
+                    player.Looping = false;
                     player.Start();
                 }
                 else
