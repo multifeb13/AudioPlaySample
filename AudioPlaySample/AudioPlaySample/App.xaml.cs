@@ -16,7 +16,7 @@ namespace AudioPlaySample
             //MainPage = new AudioPlaySample.MainPage();
             Button btnPlay1 = new Button
             {
-                Text = "Play/Pause 1",
+                Text = "Play 1",
                 Command = new Command((obj) => {
                     DependencyService.Get<IMediaPlayer>().PlayAsync("se01");
                 })
@@ -24,17 +24,9 @@ namespace AudioPlaySample
 
             Button btnPlay2 = new Button
             {
-                Text = "Play/Pause 2",
+                Text = "Play 2",
                 Command = new Command((obj) => {
                     DependencyService.Get<IMediaPlayer>().PlayAsync("se02");
-                })
-            };
-
-            Button btnStop = new Button
-            {
-                Text = "Stop",
-                Command = new Command((obj) => {
-                    DependencyService.Get<IMediaPlayer>().Stop();
                 })
             };
 
@@ -48,7 +40,6 @@ namespace AudioPlaySample
                     Children = {
                         btnPlay1,
                         btnPlay2,
-                        btnStop
                     }
                 },
                 Padding = new Thickness(10)

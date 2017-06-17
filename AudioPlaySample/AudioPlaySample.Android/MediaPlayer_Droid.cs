@@ -26,29 +26,24 @@ namespace AudioPlaySample.Droid
             var resourceId = (int)typeof(Resource.Raw).GetField(title).GetValue(null);
 
             await Task.Run(() => {
-                if (player == null)
+                if (player != null)
                 {
-                    player = new MediaPlayer();
-                    player.SetAudioStreamType(Stream.Music);
+                    if( player.IsPlaying ) {
+                        player.Stop();
+                    }
+                    player.Release();
+                    player = null;
+                }
 
-                    player = MediaPlayer.Create(
-                                global::Android.App.Application.Context,
-                                resourceId
-                            );
-                    player.Looping = false;
-                    player.Start();
-                }
-                else
-                {
-                    if (player.IsPlaying == true)
-                    {
-                        player.Pause();
-                    }
-                    else
-                    {
-                        player.Start();
-                    }
-                }
+                player = new MediaPlayer();
+                player.SetAudioStreamType(Stream.Music);
+
+                player = MediaPlayer.Create(
+                            global::Android.App.Application.Context,
+                            resourceId
+                        );
+                player.Looping = false;
+                player.Start();
             });
         }
 
